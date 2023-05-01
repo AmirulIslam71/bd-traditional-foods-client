@@ -1,9 +1,12 @@
 import React from "react";
+import Header from "../Shared/Header/Header";
+import Footer from "../Shared/Footer/Footer";
 
 const MainLayout = () => {
   return (
-    <div>
-      <h1>hello</h1>
+    <div className="">
+      <Header></Header>
+      <Footer></Footer>
     </div>
   );
 };
