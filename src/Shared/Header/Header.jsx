@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="navbar bg-black text-primary-content sticky top-0 ">
+    <div className="navbar bg-black text-primary-content">
       <div className="container mx-auto grid lg:grid-cols-2 justify-between">
         <div className="text-amber-900 font-extrabold text-4xl italic">
           BD Traditional Foods
