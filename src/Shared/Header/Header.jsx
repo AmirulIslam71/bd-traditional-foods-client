@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../Auth/AuthProvider";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="navbar bg-slate-100 text-primary-content">
       <div className="container mx-auto grid lg:grid-cols-2 justify-between">
@@ -45,30 +48,34 @@ const Header = () => {
           >
             blog
           </NavLink>
-          <NavLink
-            to="/login"
-            className="mr-4"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "black",
-              };
-            }}
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/logout"
-            className="mr-4"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "black",
-              };
-            }}
-          >
-            LogOut
-          </NavLink>
+          {user ? (
+            <NavLink
+              to="/"
+              className="mr-4"
+              style={({ isActive, isPending }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isPending ? "red" : "black",
+                };
+              }}
+            >
+              LogOut
+            </NavLink>
+          ) : (
+            <NavLink
+              to="/login"
+              className="mr-4"
+              style={({ isActive, isPending }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isPending ? "red" : "black",
+                };
+              }}
+            >
+              Login
+            </NavLink>
+          )}
+
           <NavLink
             to="/register"
             className="mr-4"

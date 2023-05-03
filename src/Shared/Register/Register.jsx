@@ -1,27 +1,69 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Auth/AuthProvider";
+
+import { Toast } from "react-toastify/dist/components";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+
+  const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    if (password.length < 8) {
+      setError("Password must be 8 characters !!");
+      return;
+    } else if (!/(?=.*?[A-Z])/.test(password)) {
+      setError("At least one upper Case");
+    } else if (!/(?=.*?[a-z])/.test(password)) {
+      setError("At least one lower Case");
+    } else if (!/(?=.*?[0-9])/.test(password)) {
+      setError("At least one digit");
+    } else if (!/(?=.*?[#?!@$%^&*-])/.test(password)) {
+      setError("At least one special characters");
+    } else {
+      setError();
+    }
+
+    createUser(email, password)
+      .then((result) => {
+        const createUser = result.user;
+        setUser(createUser);
+        Toast("User Registration is successfully");
+
+        setError();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <div className="max-w-md mx-auto mt-4 px-4 py-8 bg-white rounded-lg shadow-md">
       <h2 className="text-center text-2xl font-bold mb-4">
         Please Register Here !!!
       </h2>
-      <form>
+      <form onSubmit={handleRegister}>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="firstName"
-          >
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
             Your Name
           </label>
           <input
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="firstName"
             type="text"
+            name="name"
+            required
             placeholder="Enter your name"
-            // value={firstName}
-            // onChange={(e) => setFirstName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -35,9 +77,11 @@ const Register = () => {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="lastName"
             type="text"
+            name="photo"
+            required
             placeholder="Enter your Photo Url"
-            // value={lastName}
-            // onChange={(e) => setLastName(e.target.value)}
+            value={photo}
+            onChange={(e) => setPhoto(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -48,9 +92,11 @@ const Register = () => {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
+            name="email"
+            required
             placeholder="Enter your email address"
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -64,11 +110,14 @@ const Register = () => {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
+            name="password"
+            required
             placeholder="Enter your password"
-            // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <p className="text-yellow-700 pb-3">{error}</p>
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
