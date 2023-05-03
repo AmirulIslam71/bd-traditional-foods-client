@@ -3,7 +3,7 @@ import Carousel from "./Carousel";
 
 const Banner = () => {
   return (
-    <div className="bg-amber-800">
+    <div className="">
       <div className="relative">
         <img
           className="w-full h-auto"

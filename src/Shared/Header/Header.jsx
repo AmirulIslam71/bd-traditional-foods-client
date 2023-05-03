@@ -3,19 +3,19 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="navbar bg-black text-primary-content">
+    <div className="navbar bg-slate-100 text-primary-content">
       <div className="container mx-auto grid lg:grid-cols-2 justify-between">
         <div className="text-amber-900 font-extrabold text-4xl italic">
           BD Traditional Foods
         </div>
-        <div className="">
+        <div className=" font-serif text-2xl">
           <NavLink
             to="/"
             className="mr-4"
             style={({ isActive, isPending }) => {
               return {
                 fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "white",
+                color: isPending ? "red" : "black",
               };
             }}
           >
@@ -27,19 +27,19 @@ const Header = () => {
             style={({ isActive, isPending }) => {
               return {
                 fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "white",
+                color: isPending ? "red" : "black",
               };
             }}
           >
             Menus
           </NavLink>
           <NavLink
-            to="/blog"
+            to="/blogs"
             className="mr-4"
             style={({ isActive, isPending }) => {
               return {
                 fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "white",
+                color: isPending ? "red" : "black",
               };
             }}
           >
@@ -51,7 +51,7 @@ const Header = () => {
             style={({ isActive, isPending }) => {
               return {
                 fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "white",
+                color: isPending ? "red" : "black",
               };
             }}
           >
@@ -63,7 +63,7 @@ const Header = () => {
             style={({ isActive, isPending }) => {
               return {
                 fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "white",
+                color: isPending ? "red" : "black",
               };
             }}
           >
@@ -75,7 +75,7 @@ const Header = () => {
             style={({ isActive, isPending }) => {
               return {
                 fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "white",
+                color: isPending ? "red" : "black",
               };
             }}
           >

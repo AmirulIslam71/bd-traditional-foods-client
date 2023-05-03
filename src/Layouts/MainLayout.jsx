@@ -5,9 +5,11 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className="bg-black">
+    <div className="bg-slate-600">
       <Header></Header>
-      <Outlet></Outlet>
+      <div>
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   );

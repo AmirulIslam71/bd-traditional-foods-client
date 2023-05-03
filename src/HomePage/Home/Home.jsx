@@ -11,8 +11,11 @@ const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      <div className="bg-red-200">
+      <div className="bg-black">
         <div className="container mx-auto pt-10 pb-10">
+          <p className="font-mono font-extrabold text-6xl text-center italic text-orange-700 pb-8">
+            Our Experience Chefs Teams
+          </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {chefsData.map((chefs) => (
               <ChefsList key={chefs.id} chefs={chefs}></ChefsList>

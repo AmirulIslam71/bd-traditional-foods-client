@@ -1,20 +1,48 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ChefsList = ({ chefs }) => {
-  console.log(chefs);
+  const { id, name, picture, numRecipes, yearsOfExperience, recipes } = chefs;
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
-      <figure>
+    <div className="card w-96 glass">
+      <figure className="">
         <img
-          src="/images/stock/photo-1635805737707-575885ab0820.jpg"
-          alt="Movie"
+          className="h-60 w-full p-4"
+          src="https://nationaltoday.com/wp-content/uploads/2021/07/shutterstock_1518533924-min.jpg"
+          alt="chefs"
         />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">New movie is released!</h2>
-        <p>Click the button to watch on Jetflix app.</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Watch</button>
+      <div className="card-body ">
+        <h2 className="card-title font-extrabold font-serif text-4xl text-cyan-400">
+          {name}
+        </h2>
+        <div>
+          <p className="text-cyan-200 text-xl">
+            Number Of Recipes :{" "}
+            <span className="text-red-500">{numRecipes}</span>
+          </p>
+          <p className="text-cyan-200 text-xl">
+            Years Experience :{" "}
+            <span className="text-red-500">{yearsOfExperience}</span>
+          </p>
+          <div className="text-slate-100">
+            <p className="font-extrabold text-2xl text-red-500">Recipes</p>
+            <div className="divide-y">
+              <p>
+                <span className="text-2xl font-mono">{recipes[0]?.name}</span> :{" "}
+                <span>{recipes[0]?.description}</span>
+              </p>
+              <p>
+                <span className="text-2xl font-mono">{recipes[1]?.name}</span> :{" "}
+                <span>{recipes[1]?.description}</span>
+              </p>
+            </div>
+            <Link to={`/chefsDetails/${id}`}>
+              <button className="btn btn-primary w-full mt-6">
+                View details Recipes
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
