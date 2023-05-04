@@ -95,12 +95,14 @@ const Header = () => {
               Login
             </NavLink>
           )}
-          {!user && (
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full items-center p-4">
-                <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png" />
-              </div>
-            </label>
+          {user && (
+            <div className="tooltip tooltip-bottom" data-tip={user?.email}>
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full items-center mb-0">
+                  <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png" />
+                </div>
+              </label>
+            </div>
           )}
         </div>
       </div>

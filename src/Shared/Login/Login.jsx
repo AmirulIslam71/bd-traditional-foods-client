@@ -1,27 +1,33 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSingIn = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    signInUser(email, password)
-      .then((result) => {
-        const signedUser = result.user;
-        setError("");
-      })
-      .catch((error) => {
-        console.log(error);
-        setError("User not found. please check your email and password");
-      });
     form.reset();
+    if ((email, password)) {
+      signInUser(email, password)
+        .then((result) => {
+          const signedUser = result.user;
+          navigate(from, { replace: true });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setError("Please Enter valid email and password..");
+    }
   };
 
   return (
@@ -38,9 +44,8 @@ const Login = () => {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
+            name="email"
             placeholder="Enter your email address"
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -54,9 +59,8 @@ const Login = () => {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
+            name="password"
             placeholder="Enter your password"
-            // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-between">

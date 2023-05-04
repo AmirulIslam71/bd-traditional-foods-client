@@ -38,10 +38,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const createUser = result.user;
-
         setSuccess("User Registration is successfully");
-
-        setError();
       })
       .catch((error) => {
         console.log(error.message);
@@ -121,16 +118,15 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <p className="text-yellow-700 pb-3">{error}</p>
         <div className="flex items-center justify-between">
-          <Link to="/login">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              type="submit"
-            >
-              Register
-            </button>
-          </Link>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+            type="submit"
+          >
+            Register
+          </button>
         </div>
         <p className="pt-4 text-black">
           Already Have an account{" "}
