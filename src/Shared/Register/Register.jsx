@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 
 const Register = () => {
@@ -11,12 +11,17 @@ const Register = () => {
   const [photo, setPhoto] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accept, setAccept] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
-    if (password.length < 8) {
-      setError("Password must be 8 characters !!");
+    if (password.length < 6) {
+      setError("Password must be 6 characters !!");
       return;
     } else if (!/(?=.*?[A-Z])/.test(password)) {
       setError("At least one upper Case");
@@ -39,10 +44,14 @@ const Register = () => {
       .then((result) => {
         const createUser = result.user;
         setSuccess("User Registration is successfully");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);
       });
+  };
+  const handleDisabled = (event) => {
+    setAccept(event.target.checked);
   };
 
   return (
@@ -118,11 +127,25 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
+        <div className="flex items-center mb-4">
+          <input
+            onClick={handleDisabled}
+            type="checkbox"
+            name="accept"
+            className="form-checkbox h-5 w-5 text-gray-600"
+          />
+          <label
+            htmlFor="remember"
+            className="ml-2 block text-gray-700 font-bold"
+          >
+            Accept Terms and conditions
+          </label>
+        </div>
         <p className="text-yellow-700 pb-3">{error}</p>
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+            disabled={!accept}
             type="submit"
           >
             Register
