@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Auth/AuthProvider";
 
 const Login = () => {
+  const { signInUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+
+  const handleSingIn = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signInUser(email, password)
+      .then((result) => {
+        const signedUser = result.user;
+        setError("");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("User not found. please check your email and password");
+      });
+    form.reset();
+  };
+
   return (
     <div className="max-w-md mx-auto mt-4 px-4 py-8 bg-white rounded-lg shadow-md">
       <h2 className="text-center text-2xl font-bold mb-4">
         Please Login Here !!!
       </h2>
-      <form>
+      <form onSubmit={handleSingIn}>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
             Email Address
@@ -42,9 +64,10 @@ const Login = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             type="submit"
           >
-            Register
+            Login
           </button>
         </div>
+        <p className="p-2 text-red-600">{error}</p>
         <p className="pt-4 text-black">
           Don't have a Account go for{" "}
           <Link to="/register" className="text-xl text-red-600">

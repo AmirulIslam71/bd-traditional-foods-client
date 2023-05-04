@@ -8,6 +8,7 @@ import Login from "../Shared/Login/Login";
 import Blogs from "../HomePage/Blogs/Blogs";
 import ChefsDetails from "../Shared/ChefsDetails/ChefsDetails";
 import ChefsLayout from "../Layouts/ChefsLayout";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: ":id",
-        element: <ChefsDetails></ChefsDetails>,
+        element: (
+          <PrivateRouter>
+            <ChefsDetails></ChefsDetails>
+          </PrivateRouter>
+        ),
         loader: ({ params }) =>
           fetch(
             `https://bd-traditionals-foods-server-amirulislam71.vercel.app/allData/${params.id}`

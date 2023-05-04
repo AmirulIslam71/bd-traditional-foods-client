@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA0yoFa7TJy78AxgnIwaCVVcvTDXlDoqwQ",
-  authDomain: "bd-traditional-foods.firebaseapp.com",
-  projectId: "bd-traditional-foods",
-  storageBucket: "bd-traditional-foods.appspot.com",
-  messagingSenderId: "398439098628",
-  appId: "1:398439098628:web:89c05ec99f3bacd17f4851",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

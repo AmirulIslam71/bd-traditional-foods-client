@@ -2,17 +2,15 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 
-import { Toast } from "react-toastify/dist/components";
-
 const Register = () => {
   const { createUser } = useContext(AuthContext);
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -22,21 +20,26 @@ const Register = () => {
       return;
     } else if (!/(?=.*?[A-Z])/.test(password)) {
       setError("At least one upper Case");
+      return;
     } else if (!/(?=.*?[a-z])/.test(password)) {
       setError("At least one lower Case");
+      return;
     } else if (!/(?=.*?[0-9])/.test(password)) {
       setError("At least one digit");
+      return;
     } else if (!/(?=.*?[#?!@$%^&*-])/.test(password)) {
       setError("At least one special characters");
+      return;
     } else {
       setError();
     }
+    form.reset();
 
     createUser(email, password)
       .then((result) => {
         const createUser = result.user;
-        setUser(createUser);
-        Toast("User Registration is successfully");
+
+        setSuccess("User Registration is successfully");
 
         setError();
       })
@@ -50,6 +53,7 @@ const Register = () => {
       <h2 className="text-center text-2xl font-bold mb-4">
         Please Register Here !!!
       </h2>
+      <h2 className="text-primary text-xl p-2 text-center">{success}</h2>
       <form onSubmit={handleRegister}>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
@@ -119,12 +123,14 @@ const Register = () => {
         </div>
         <p className="text-yellow-700 pb-3">{error}</p>
         <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-            type="submit"
-          >
-            Register
-          </button>
+          <Link to="/login">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              type="submit"
+            >
+              Register
+            </button>
+          </Link>
         </div>
         <p className="pt-4 text-black">
           Already Have an account{" "}

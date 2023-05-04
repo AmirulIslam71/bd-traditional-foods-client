@@ -6,11 +6,7 @@ const ChefsList = ({ chefs }) => {
   return (
     <div className="card w-96 glass">
       <figure className="">
-        <img
-          className="h-60 w-full p-4"
-          src="https://nationaltoday.com/wp-content/uploads/2021/07/shutterstock_1518533924-min.jpg"
-          alt="chefs"
-        />
+        <img className="h-60 w-full p-4" src={picture} alt="chefs" />
       </figure>
       <div className="card-body ">
         <h2 className="card-title font-extrabold font-serif text-4xl text-cyan-400">
@@ -36,9 +32,13 @@ const ChefsList = ({ chefs }) => {
                 <span className="text-2xl font-mono">{recipes[1]?.name}</span> :{" "}
                 <span>{recipes[1]?.description}</span>
               </p>
+              <p>
+                <span className="text-2xl font-mono">{recipes[2]?.name}</span> :{" "}
+                <span>{recipes[2]?.description}</span>
+              </p>
             </div>
             <Link to={`/chefsDetails/${id}`}>
-              <button className="btn btn-primary w-full mt-6">
+              <button className="btn btn-primary w-full mb-0">
                 View details Recipes
               </button>
             </Link>
