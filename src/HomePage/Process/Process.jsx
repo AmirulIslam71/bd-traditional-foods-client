@@ -3,11 +3,11 @@ import React from "react";
 const Process = () => {
   return (
     <>
-      <div className="container mx-auto text-center pb-10">
-        <p className="text-rose-600 text-4xl font-mono italic font-extrabold">
+      <div className="container mx-auto text-center lg:pb-10 sm:pb-2">
+        <p className="text-rose-600 lg:text-4xl font-mono italic lg:font-extrabold">
           Our Process
         </p>
-        <p className="text-amber-900 text-6xl font-mono font-extrabold">
+        <p className="text-amber-900 lg:text-6xl font-mono font-extrabold">
           Healthy & Improves Your Mood
         </p>
       </div>

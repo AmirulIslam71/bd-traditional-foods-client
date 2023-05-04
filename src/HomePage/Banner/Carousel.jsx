@@ -2,7 +2,7 @@ import React from "react";
 
 const Carousel = () => {
   return (
-    <div className="carousel mx-auto h-96 mt-10" style={{ width: "70%" }}>
+    <div className="carousel mx-auto lg:h-96 lg:mt-10" style={{ width: "70%" }}>
       <div id="slide1" className="carousel-item relative w-full">
         <img
           src="https://i.ytimg.com/vi/NgVHQaK_AFw/maxresdefault.jpg"

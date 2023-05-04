@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 import {
   AiOutlineHeart,
   AiOutlineShareAlt,
@@ -24,7 +25,10 @@ const ChefsDetails = () => {
   return (
     <div>
       <div className="relative">
-        <img className="w-full h-auto" src={picture} alt="Banner" />
+        <LazyLoad className="h-auto" offset={300}>
+          <img className="w-full" src={picture} alt="Banner" />
+        </LazyLoad>
+
         <div className="absolute top-0 h-full w-full left-0 opacity-0 hover:opacity-75 transition duration-500 bg-black ">
           <div className="p-10 container text-center">
             <h2 className="font-extrabold mb-2 p-8">

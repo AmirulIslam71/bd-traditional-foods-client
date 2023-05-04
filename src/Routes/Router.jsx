@@ -9,11 +9,13 @@ import Blogs from "../HomePage/Blogs/Blogs";
 import ChefsDetails from "../Shared/ChefsDetails/ChefsDetails";
 import ChefsLayout from "../Layouts/ChefsLayout";
 import PrivateRouter from "./PrivateRouter";
+import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -33,11 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "blogs",
-        element: (
-          <PrivateRouter>
-            <Blogs></Blogs>
-          </PrivateRouter>
-        ),
+        element: <Blogs></Blogs>,
       },
     ],
   },

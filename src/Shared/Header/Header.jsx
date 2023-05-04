@@ -6,7 +6,9 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
-      .then()
+      .then(() => {
+        navigate(from, { replace: true });
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -31,18 +33,7 @@ const Header = () => {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/menus"
-            className="mr-4"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: isPending ? "red" : "black",
-              };
-            }}
-          >
-            Menus
-          </NavLink>
+
           <NavLink
             to="/blogs"
             className="mr-4"
