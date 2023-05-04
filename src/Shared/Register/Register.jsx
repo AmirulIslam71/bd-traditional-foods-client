@@ -1,9 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
+import {
+  AiFillGoogleCircle,
+  AiOutlineGithub,
+  AiOutlineGoogle,
+} from "react-icons/ai";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, signInWithGithub } =
+    useContext(AuthContext);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -52,6 +58,16 @@ const Register = () => {
   };
   const handleDisabled = (event) => {
     setAccept(event.target.checked);
+  };
+
+  const handleSignInWithGoogle = () => {
+    signInWithGoogle();
+    navigate(from, { replace: true });
+  };
+
+  const handleSignInGithub = () => {
+    signInWithGithub();
+    navigate(from, { replace: true });
   };
 
   return (
@@ -158,6 +174,24 @@ const Register = () => {
           </Link>
         </p>
       </form>
+      <div className="text-center mb-2 mt-2">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full flex mx-auto"
+          type="submit"
+          onClick={handleSignInWithGoogle}
+        >
+          <AiOutlineGoogle className="text-2xl" /> Login with Google
+        </button>
+      </div>
+      <div className="text-center">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full flex mx-auto"
+          type="submit"
+          onClick={handleSignInGithub}
+        >
+          <AiOutlineGithub className="text-2xl" /> Login with Github
+        </button>
+      </div>
     </div>
   );
 };

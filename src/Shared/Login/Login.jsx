@@ -1,9 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
+import {
+  AiFillGoogleCircle,
+  AiOutlineGithub,
+  AiOutlineGoogle,
+} from "react-icons/ai";
 
 const Login = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle, signInWithGithub } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,6 +34,16 @@ const Login = () => {
     } else {
       setError("Please Enter valid email and password..");
     }
+  };
+
+  const handleSignInWithGoogle = () => {
+    signInWithGoogle();
+    navigate(from, { replace: true });
+  };
+
+  const handleSignInGithub = () => {
+    signInWithGithub();
+    navigate(from, { replace: true });
   };
 
   return (
@@ -72,13 +88,31 @@ const Login = () => {
           </button>
         </div>
         <p className="p-2 text-red-600">{error}</p>
-        <p className="pt-4 text-black">
+        <p className="p-2 text-black">
           Don't have a Account go for{" "}
           <Link to="/register" className="text-xl text-red-600">
             Register
           </Link>
         </p>
       </form>
+      <div className="text-center mb-2">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full flex mx-auto"
+          type="submit"
+          onClick={handleSignInWithGoogle}
+        >
+          <AiOutlineGoogle className="text-2xl" /> Login with Google
+        </button>
+      </div>
+      <div className="text-center">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full flex mx-auto"
+          type="submit"
+          onClick={handleSignInGithub}
+        >
+          <AiOutlineGithub className="text-2xl" /> Login with Github
+        </button>
+      </div>
     </div>
   );
 };
