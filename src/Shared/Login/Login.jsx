@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
-import {
-  AiFillGoogleCircle,
-  AiOutlineGithub,
-  AiOutlineGoogle,
-} from "react-icons/ai";
+import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const { signInUser, signInWithGoogle, signInWithGithub } =
@@ -27,6 +25,7 @@ const Login = () => {
         .then((result) => {
           const signedUser = result.user;
           navigate(from, { replace: true });
+          toast("Login successfully!!");
         })
         .catch((error) => {
           console.log(error);
@@ -112,6 +111,7 @@ const Login = () => {
         >
           <AiOutlineGithub className="text-2xl" /> Login with Github
         </button>
+        <ToastContainer></ToastContainer>
       </div>
     </div>
   );

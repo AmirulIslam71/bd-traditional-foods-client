@@ -6,6 +6,8 @@ import {
   AiOutlineGithub,
   AiOutlineGoogle,
 } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const { createUser, signInWithGoogle, signInWithGithub } =
@@ -51,6 +53,7 @@ const Register = () => {
         const createUser = result.user;
         setSuccess("User Registration is successfully");
         navigate(from, { replace: true });
+        toast("Registration complete successfully!!");
       })
       .catch((error) => {
         console.log(error.message);
@@ -75,7 +78,6 @@ const Register = () => {
       <h2 className="text-center text-2xl font-bold mb-4">
         Please Register Here !!!
       </h2>
-      <h2 className="text-primary text-xl p-2 text-center">{success}</h2>
       <form onSubmit={handleRegister}>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
@@ -191,6 +193,7 @@ const Register = () => {
         >
           <AiOutlineGithub className="text-2xl" /> Login with Github
         </button>
+        <ToastContainer />
       </div>
     </div>
   );

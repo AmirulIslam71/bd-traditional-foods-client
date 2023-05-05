@@ -60,4 +60,4 @@ This application use tailwind css, font awesome, toast.
 
 ## Firebase Link
 
-This section provide Live Website link : [https://jocular-cranachan-4ebf88.netlify.app/appliedJobs]
+This section provide Live Website link : [https://bd-traditional-foods.web.app]
