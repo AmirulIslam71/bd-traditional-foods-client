@@ -15,8 +15,7 @@ const Banner = () => {
             <h2 className="lg:font-extrabold md:font-bold lg:mb-2 lg:p-8 sm:p-4">
               <span className="lg:text-6xl md:text-xl sm:text-sm text-white font-serif">
                 Welcome to our
-              </span>
-              <br />
+              </span>{" "}
               <span className="lg:text-7xl md:text-4xl text-red-700">
                 Restaurant !!
               </span>

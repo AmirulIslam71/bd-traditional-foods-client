@@ -15,9 +15,20 @@ const ChefsDetails = () => {
 
   const { id, name, numRecipes, picture, recipes, yearsOfExperience } =
     chefsDetails;
-  const handleDisabled = () => {
-    if (true) {
-      toast("Add your favorites item !!!");
+  const handleAddToFavorites = (recipe) => {
+    const favoriteRecipes =
+      JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
+
+    const isRecipeAlreadyAdded = favoriteRecipes.some(
+      (favRecipe) => favRecipe.name === recipe.name
+    );
+
+    if (isRecipeAlreadyAdded) {
+      toast("Recipe already added to favorites");
+    } else {
+      favoriteRecipes.push(recipe);
+      localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
+      toast("Recipe added to favorites");
       setIsDisabled(true);
     }
   };
@@ -82,12 +93,18 @@ const ChefsDetails = () => {
                 <p className="">
                   <AiOutlineHeart />
                 </p>
-                <p className="ml-2">{recipes[2]?.likes}</p>
+                <p className="ml-2">{recipes[0]?.likes}</p>
               </div>
               <div className="text-xl flex  items-center text-white">
                 <p className="flex items-center">
                   <AiOutlineShareAlt /> <span>Share</span>
                 </p>
+                <button
+                  className="flex items-center btn-primary p-2 rounded-xl "
+                  onClick={() => handleAddToFavorites(recipes[0])}
+                >
+                  <AiOutlineShoppingCart /> Add to Favorites
+                </button>
               </div>
             </div>
             <div className="mt-5">
@@ -121,6 +138,13 @@ const ChefsDetails = () => {
                   <p className="flex items-center">
                     <AiOutlineShareAlt /> <span>Share</span>
                   </p>
+                  <button
+                    className="flex items-center btn-primary p-2 rounded-xl "
+                    onClick={() => handleAddToFavorites(recipes[1])}
+                    disabled={isDisabled}
+                  >
+                    <AiOutlineShoppingCart /> Add to Favorites
+                  </button>
                 </div>
               </div>
             </div>
@@ -155,6 +179,12 @@ const ChefsDetails = () => {
                   <p className="flex items-center">
                     <AiOutlineShareAlt /> <span>Share</span>
                   </p>
+                  <button
+                    className="flex items-center btn-primary p-2 rounded-xl "
+                    onClick={() => handleAddToFavorites(recipes[2])}
+                  >
+                    <AiOutlineShoppingCart /> Add to Favorites
+                  </button>
                 </div>
               </div>
             </div>
@@ -162,14 +192,6 @@ const ChefsDetails = () => {
               <Link to="/">
                 <button className="btn btn-primary">Back to Home page</button>
               </Link>
-
-              <button
-                className="flex items-center btn-primary p-2 rounded-xl "
-                onClick={handleDisabled}
-                disabled={isDisabled}
-              >
-                <AiOutlineShoppingCart /> Add to Favorites
-              </button>
             </div>
             <ToastContainer />
           </div>
